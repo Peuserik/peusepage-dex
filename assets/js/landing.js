@@ -101,7 +101,15 @@ const startTransition = () => {
   dom.transitionLayer.setAttribute("aria-hidden", "false");
 
   window.setTimeout(() => {
-    window.location.href = state.config.meta.mainPage;
+    const selectedTheme = state.config.themes[state.themeIndex];
+    const selectedLanguage = state.config.languages[state.languageIndex];
+    const mode = document.body.dataset.mode === "dark" ? "night" : "day";
+    const params = new URLSearchParams({
+      theme: selectedTheme.id,
+      lang: selectedLanguage.code,
+      mode,
+    });
+    window.location.href = `${state.config.meta.mainPage}?${params.toString()}`;
   }, durationMs);
 };
 

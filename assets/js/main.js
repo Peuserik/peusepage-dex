@@ -304,6 +304,29 @@ const validateConfig = (config) => {
   }
 };
 
+const applyInitialUrlState = () => {
+  const params = new URLSearchParams(window.location.search);
+  const theme = params.get("theme");
+  const lang = params.get("lang");
+  const mode = params.get("mode");
+
+  if (theme) {
+    const themeIndex = state.config.themes.findIndex((entry) => entry.id === theme);
+    if (themeIndex >= 0) {
+      state.themeIndex = themeIndex;
+    }
+  }
+
+  if (lang) {
+    const languageIndex = state.config.languages.findIndex((entry) => entry.code === lang);
+    if (languageIndex >= 0) {
+      state.languageIndex = languageIndex;
+    }
+  }
+
+  setNightMode(mode === "night");
+};
+
 const loadConfig = async () => {
   const response = await fetch("content/main.json", { cache: "no-store" });
   if (!response.ok) {
@@ -316,7 +339,7 @@ const init = async () => {
   try {
     state.config = await loadConfig();
     validateConfig(state.config);
-    setNightMode(false);
+    applyInitialUrlState();
     setupControlEvents();
     setupActionEvents();
     applyLanguage();
