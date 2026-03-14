@@ -19,7 +19,6 @@ const createElement = (tag, className, text) => {
 
 const dom = {
   crtScreen: requireElement("crt-screen"),
-  crtDesktop: requireElement("crt-desktop"),
   desktopFileName: requireElement("desktop-file-name"),
   certificateLabel: requireElement("certificate-label"),
   certificateName: requireElement("certificate-name"),
@@ -43,9 +42,8 @@ const state = {
   config: null,
   themeIndex: 0,
   languageIndex: 0,
-  darkMode: false,
+  isNight: false,
   activePopup: null,
-  crtDesktopVisible: false,
 };
 
 const getLanguage = () => state.config.languages[state.languageIndex];
@@ -57,8 +55,22 @@ const getThemeLabel = (theme, langCode) => {
   return theme.labels[langCode] || theme.labels.en || theme.id;
 };
 
-const setDarkMode = (enabled) => {
-  state.darkMode = enabled;
+const getLinkLabel = (link, langCode) => {
+  if (!link.labels || typeof link.labels !== "object") {
+    return link.id || "Link";
+  }
+  return link.labels[langCode] || link.labels.en || link.id || "Link";
+};
+
+const closePopup = () => {
+  if (state.activePopup) {
+    state.activePopup.remove();
+    state.activePopup = null;
+  }
+};
+
+const setNightMode = (enabled) => {
+  state.isNight = enabled;
   document.body.dataset.mode = enabled ? "night" : "day";
 };
 
@@ -69,13 +81,138 @@ const applyTheme = () => {
   dom.themeButton.textContent = `${language.controls.theme}: ${getThemeLabel(theme, language.code)}`;
 };
 
-const applyControlLabels = () => {
+const renderApplicationsPopup = (container, language) => {
+  container.appendChild(createElement("p", "", language.popups.applications.description));
+
+  const grid = createElement("ul", "app-grid");
+  language.popups.applications.apps.forEach((app) => {
+    const item = createElement("li", "app-item");
+    const symbol = createElement("span", "app-symbol", app.symbol);
+    const wrap = createElement("div");
+    wrap.append(createElement("p", "app-name", app.name), createElement("p", "app-tag", app.tag));
+    item.append(symbol, wrap);
+    grid.appendChild(item);
+  });
+  container.appendChild(grid);
+};
+
+const renderCertificatePopup = (container, language) => {
+  container.appendChild(createElement("p", "", language.popups.certificate.summary));
+  container.appendChild(createElement("p", "", language.popups.certificate.monitorHint));
+  container.appendChild(createElement("h3", "", language.popups.certificate.linksTitle));
+
+  const links = createElement("ul", "link-list");
+  state.config.contactLinks.forEach((link) => {
+    const item = createElement("li");
+    const anchor = createElement("a");
+    anchor.href = link.url;
+    anchor.target = link.url.startsWith("mailto:") ? "_self" : "_blank";
+    anchor.rel = "noreferrer";
+    anchor.textContent = getLinkLabel(link, language.code);
+    item.appendChild(anchor);
+    links.appendChild(item);
+  });
+  container.appendChild(links);
+};
+
+const renderHobbiesPopup = (container, language) => {
+  container.appendChild(createElement("p", "", language.popups.hobbies.intro));
+  const list = createElement("ul");
+  language.popups.hobbies.items.forEach((itemText) => {
+    list.appendChild(createElement("li", "", itemText));
+  });
+  container.appendChild(list);
+};
+
+const renderTasksPopup = (container, language) => {
+  container.appendChild(createElement("h3", "", language.popups.tasks.latestTitle));
+  const latestList = createElement("ul");
+  language.popups.tasks.latestEvents.forEach((itemText) => {
+    latestList.appendChild(createElement("li", "", itemText));
+  });
+  container.appendChild(latestList);
+
+  container.appendChild(createElement("h3", "", language.popups.tasks.currentTitle));
+  const currentList = createElement("ul");
+  language.popups.tasks.currentWork.forEach((itemText) => {
+    currentList.appendChild(createElement("li", "", itemText));
+  });
+  container.appendChild(currentList);
+};
+
+const renderPopupBody = (container, key, language) => {
+  container.replaceChildren();
+  if (key === "applications") {
+    renderApplicationsPopup(container, language);
+    return;
+  }
+  if (key === "certificate") {
+    renderCertificatePopup(container, language);
+    return;
+  }
+  if (key === "hobbies") {
+    renderHobbiesPopup(container, language);
+    return;
+  }
+  if (key === "tasks") {
+    renderTasksPopup(container, language);
+  }
+};
+
+const openPopup = (key) => {
   const language = getLanguage();
-  const modeText = state.darkMode ? language.controls.night : language.controls.day;
-  dom.darkmodeButton.textContent = `${language.controls.mode}: ${modeText}`;
-  dom.darkmodeButton.setAttribute("aria-pressed", state.darkMode ? "true" : "false");
-  dom.languageButton.textContent = `${language.controls.language}: ${language.label}`;
-  applyTheme();
+  closePopup();
+
+  const fragment = dom.popupTemplate.content.cloneNode(true);
+  const overlay = fragment.querySelector(".popup-overlay");
+  const popupWindow = fragment.querySelector(".popup-window");
+  const title = fragment.querySelector(".popup-title");
+  const closeButton = fragment.querySelector(".popup-close");
+  const body = fragment.querySelector(".popup-body");
+
+  if (!overlay || !popupWindow || !title || !closeButton || !body) {
+    throw new Error("Popup template is missing required elements.");
+  }
+
+  title.textContent = language.popups[key].title;
+  renderPopupBody(body, key, language);
+
+  closeButton.addEventListener("click", () => closePopup());
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      closePopup();
+    }
+  });
+  popupWindow.addEventListener("click", (event) => event.stopPropagation());
+
+  dom.popupLayer.appendChild(overlay);
+  state.activePopup = overlay;
+  state.activePopup.dataset.popupKey = key;
+};
+
+const refreshOpenPopupLanguage = () => {
+  if (!state.activePopup) {
+    return;
+  }
+
+  const key = state.activePopup.dataset.popupKey;
+  if (!key) {
+    return;
+  }
+
+  const language = getLanguage();
+  const title = state.activePopup.querySelector(".popup-title");
+  const body = state.activePopup.querySelector(".popup-body");
+  if (!title || !body) {
+    return;
+  }
+
+  title.textContent = language.popups[key].title;
+  renderPopupBody(body, key, language);
+};
+
+const revealDesktopOnCertificate = () => {
+  dom.crtScreen.classList.add("desktop-visible");
 };
 
 const updateActionLabels = () => {
@@ -88,149 +225,13 @@ const updateActionLabels = () => {
   dom.pinboardAction.setAttribute("aria-label", language.actionLabels.pinboard);
 };
 
-const renderApplicationsPopup = (container, language) => {
-  container.appendChild(createElement("p", "", language.popups.applications.description));
-
-  const grid = createElement("ul", "app-grid");
-  language.popups.applications.apps.forEach((app) => {
-    const item = createElement("li", "app-item");
-    const symbol = createElement("span", "app-symbol", app.symbol);
-    const textWrap = createElement("div");
-    const name = createElement("p", "app-name", app.name);
-    const tag = createElement("p", "app-tag", app.tag);
-    textWrap.append(name, tag);
-    item.append(symbol, textWrap);
-    grid.appendChild(item);
-  });
-  container.appendChild(grid);
-};
-
-const renderCertificatePopup = (container, language) => {
-  container.appendChild(createElement("p", "", language.popups.certificate.summary));
-  container.appendChild(createElement("p", "", language.popups.certificate.monitorHint));
-
-  const linksTitle = createElement("h3", "", language.popups.certificate.linksTitle);
-  container.appendChild(linksTitle);
-  const linkList = createElement("ul", "link-list");
-
-  state.config.contactLinks.forEach((link) => {
-    const item = createElement("li");
-    const anchor = createElement("a");
-    anchor.href = link.url;
-    anchor.target = link.url.startsWith("mailto:") ? "_self" : "_blank";
-    anchor.rel = "noreferrer";
-    anchor.textContent = link.label;
-    item.appendChild(anchor);
-    linkList.appendChild(item);
-  });
-
-  container.appendChild(linkList);
-};
-
-const renderHobbiesPopup = (container, language) => {
-  container.appendChild(createElement("p", "", language.popups.hobbies.intro));
-  const list = createElement("ul");
-  language.popups.hobbies.items.forEach((entry) => {
-    list.appendChild(createElement("li", "", entry));
-  });
-  container.appendChild(list);
-};
-
-const renderTasksPopup = (container, language) => {
-  const latestHeading = createElement("h3", "", language.popups.tasks.latestTitle);
-  container.appendChild(latestHeading);
-  const latestList = createElement("ul");
-  language.popups.tasks.latestEvents.forEach((entry) => {
-    latestList.appendChild(createElement("li", "", entry));
-  });
-  container.appendChild(latestList);
-
-  const currentHeading = createElement("h3", "", language.popups.tasks.currentTitle);
-  container.appendChild(currentHeading);
-  const currentList = createElement("ul");
-  language.popups.tasks.currentWork.forEach((entry) => {
-    currentList.appendChild(createElement("li", "", entry));
-  });
-  container.appendChild(currentList);
-};
-
-const renderPopupBody = (container, popupKey, language) => {
-  container.replaceChildren();
-
-  if (popupKey === "applications") {
-    renderApplicationsPopup(container, language);
-    return;
-  }
-  if (popupKey === "certificate") {
-    renderCertificatePopup(container, language);
-    return;
-  }
-  if (popupKey === "hobbies") {
-    renderHobbiesPopup(container, language);
-    return;
-  }
-  if (popupKey === "tasks") {
-    renderTasksPopup(container, language);
-  }
-};
-
-const closePopup = () => {
-  if (state.activePopup) {
-    state.activePopup.remove();
-    state.activePopup = null;
-  }
-};
-
-const openPopup = (popupKey) => {
+const updateControlLabels = () => {
   const language = getLanguage();
-  closePopup();
-
-  const fragment = dom.popupTemplate.content.cloneNode(true);
-  const overlay = fragment.querySelector(".popup-overlay");
-  const windowElement = fragment.querySelector(".popup-window");
-  const title = fragment.querySelector(".popup-title");
-  const closeButton = fragment.querySelector(".popup-close");
-  const body = fragment.querySelector(".popup-body");
-
-  title.textContent = language.popups[popupKey].title;
-  renderPopupBody(body, popupKey, language);
-
-  closeButton.addEventListener("click", () => closePopup());
-  overlay.addEventListener("click", (event) => {
-    if (event.target === overlay) {
-      closePopup();
-    }
-  });
-
-  windowElement.addEventListener("click", (event) => {
-    event.stopPropagation();
-  });
-
-  dom.popupLayer.appendChild(overlay);
-  state.activePopup = overlay;
-  state.activePopup.dataset.popupKey = popupKey;
-};
-
-const refreshOpenPopupLanguage = () => {
-  if (!state.activePopup) {
-    return;
-  }
-
-  const popupKey = state.activePopup.dataset.popupKey;
-  const language = getLanguage();
-  const title = state.activePopup.querySelector(".popup-title");
-  const body = state.activePopup.querySelector(".popup-body");
-  if (!title || !body || !popupKey) {
-    return;
-  }
-
-  title.textContent = language.popups[popupKey].title;
-  renderPopupBody(body, popupKey, language);
-};
-
-const revealDesktopOnCrt = () => {
-  state.crtDesktopVisible = true;
-  dom.crtScreen.classList.add("desktop-visible");
+  const modeText = state.isNight ? language.controls.night : language.controls.day;
+  dom.darkmodeButton.textContent = `${language.controls.mode}: ${modeText}`;
+  dom.darkmodeButton.setAttribute("aria-pressed", state.isNight ? "true" : "false");
+  dom.languageButton.textContent = `${language.controls.language}: ${language.label}`;
+  applyTheme();
 };
 
 const applyLanguage = () => {
@@ -246,14 +247,14 @@ const applyLanguage = () => {
   dom.desktopFileName.textContent = language.popups.certificate.desktopFileLabel;
 
   updateActionLabels();
-  applyControlLabels();
+  updateControlLabels();
   refreshOpenPopupLanguage();
 };
 
 const setupControlEvents = () => {
   dom.darkmodeButton.addEventListener("click", () => {
-    setDarkMode(!state.darkMode);
-    applyControlLabels();
+    setNightMode(!state.isNight);
+    updateControlLabels();
   });
 
   dom.themeButton.addEventListener("click", () => {
@@ -268,23 +269,18 @@ const setupControlEvents = () => {
 };
 
 const setupActionEvents = () => {
-  const openApplications = () => openPopup("applications");
-  dom.computerAction.addEventListener("click", openApplications);
-  dom.keyboardAction.addEventListener("click", openApplications);
-  dom.mouseAction.addEventListener("click", openApplications);
+  const openApps = () => openPopup("applications");
+  dom.computerAction.addEventListener("click", openApps);
+  dom.keyboardAction.addEventListener("click", openApps);
+  dom.mouseAction.addEventListener("click", openApps);
 
   dom.certificateAction.addEventListener("click", () => {
-    revealDesktopOnCrt();
+    revealDesktopOnCertificate();
     openPopup("certificate");
   });
 
-  dom.windowAction.addEventListener("click", () => {
-    openPopup("hobbies");
-  });
-
-  dom.pinboardAction.addEventListener("click", () => {
-    openPopup("tasks");
-  });
+  dom.windowAction.addEventListener("click", () => openPopup("hobbies"));
+  dom.pinboardAction.addEventListener("click", () => openPopup("tasks"));
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
@@ -297,14 +293,14 @@ const validateConfig = (config) => {
   if (!config || typeof config !== "object") {
     throw new Error("content/main.json must contain a JSON object.");
   }
-  if (!Array.isArray(config.languages) || config.languages.length === 0) {
-    throw new Error("content/main.json requires a non-empty languages array.");
-  }
   if (!Array.isArray(config.themes) || config.themes.length === 0) {
     throw new Error("content/main.json requires a non-empty themes array.");
   }
+  if (!Array.isArray(config.languages) || config.languages.length === 0) {
+    throw new Error("content/main.json requires a non-empty languages array.");
+  }
   if (!Array.isArray(config.contactLinks) || config.contactLinks.length === 0) {
-    throw new Error("content/main.json requires contactLinks.");
+    throw new Error("content/main.json requires contact links.");
   }
 };
 
@@ -320,7 +316,7 @@ const init = async () => {
   try {
     state.config = await loadConfig();
     validateConfig(state.config);
-    setDarkMode(false);
+    setNightMode(false);
     setupControlEvents();
     setupActionEvents();
     applyLanguage();

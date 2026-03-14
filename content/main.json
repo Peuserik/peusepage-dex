@@ -4,64 +4,82 @@
   },
   "themes": [
     {
-      "id": "matrix-green",
+      "id": "aurora",
       "labels": {
-        "en": "Green",
-        "de": "Gruen",
-        "fr": "Vert",
-        "es": "Verde"
+        "en": "Aurora",
+        "de": "Aurora"
       }
     },
     {
-      "id": "matrix-blue",
+      "id": "sunset",
       "labels": {
-        "en": "Blue",
-        "de": "Blau",
-        "fr": "Bleu",
-        "es": "Azul"
+        "en": "Sunset",
+        "de": "Abend"
       }
     },
     {
-      "id": "matrix-amber",
+      "id": "matrix",
       "labels": {
-        "en": "Amber",
-        "de": "Amber",
-        "fr": "Ambre",
-        "es": "Ambar"
+        "en": "Matrix",
+        "de": "Matrix"
       }
     }
   ],
   "contactLinks": [
     {
-      "label": "LinkedIn",
-      "url": "https://linkedin.com/in/your-handle"
+      "id": "linkedin",
+      "url": "https://linkedin.com/in/your-handle",
+      "labels": {
+        "en": "LinkedIn",
+        "de": "LinkedIn"
+      }
     },
     {
-      "label": "Xing",
-      "url": "https://www.xing.com/profile/your-handle"
+      "id": "xing",
+      "url": "https://www.xing.com/profile/your-handle",
+      "labels": {
+        "en": "Xing",
+        "de": "Xing"
+      }
     },
     {
-      "label": "X",
-      "url": "https://x.com/your-handle"
+      "id": "x",
+      "url": "https://x.com/your-handle",
+      "labels": {
+        "en": "X Handle",
+        "de": "X Handle"
+      }
     },
     {
-      "label": "Threads",
-      "url": "https://www.threads.net/@your-handle"
+      "id": "threads",
+      "url": "https://www.threads.net/@your-handle",
+      "labels": {
+        "en": "Threads Handle",
+        "de": "Threads Handle"
+      }
     },
     {
-      "label": "GitHub",
-      "url": "https://github.com/your-handle"
+      "id": "github",
+      "url": "https://github.com/your-handle",
+      "labels": {
+        "en": "GitHub",
+        "de": "GitHub"
+      }
     },
     {
-      "label": "Email",
-      "url": "mailto:hello@example.com"
+      "id": "mail",
+      "url": "mailto:hello@example.com",
+      "labels": {
+        "en": "Email",
+        "de": "E-Mail"
+      }
     }
   ],
   "languages": [
     {
       "code": "en",
       "label": "EN",
-      "pageTitle": "Peusepage | Office Desktop",
+      "pageTitle": "Peusepage | Office",
       "controls": {
         "mode": "Mode",
         "day": "Day",
@@ -70,12 +88,12 @@
         "language": "Language"
       },
       "actionLabels": {
-        "computer": "Open applications popup from computer",
-        "keyboard": "Open applications popup from keyboard",
-        "mouse": "Open applications popup from mouse",
-        "certificate": "Open certificate and profile popup",
-        "window": "Open hobbies popup",
-        "pinboard": "Open tasks popup"
+        "computer": "Open application window from computer",
+        "keyboard": "Open application window from keyboard",
+        "mouse": "Open application window from mouse",
+        "certificate": "Open certificate window and profile links",
+        "window": "Open hobbies and personal information",
+        "pinboard": "Open latest events and current work"
       },
       "certificate": {
         "label": "Certificate",
@@ -88,55 +106,55 @@
       "popups": {
         "applications": {
           "title": "Applications",
-          "description": "Choose an app entry to explore profile, hobbies, and updates.",
+          "description": "Desktop shortcuts to all actions in this room.",
           "apps": [
             {
-              "symbol": "🧭",
+              "symbol": "🪪",
               "name": "Profile",
-              "tag": "Bio"
+              "tag": "CV"
             },
             {
-              "symbol": "🎮",
+              "symbol": "🌿",
               "name": "Hobbies",
-              "tag": "Fun"
+              "tag": "Life"
             },
             {
               "symbol": "📌",
-              "name": "Tasks",
+              "name": "Updates",
               "tag": "Now"
             }
           ]
         },
         "certificate": {
           "title": "Short CV",
-          "summary": "Design-focused engineer with strong product sense, UI craft, and delivery ownership from concept to release.",
-          "monitorHint": "The CRT switched from screensaver to a symbolic desktop text file.",
+          "summary": "Design-focused engineer with strong product sense, UI craftsmanship, and ownership from concept to shipped result.",
+          "monitorHint": "Certificate click switched the CRT from screensaver to a symbolic desktop text file.",
           "linksTitle": "Profiles and contact",
           "desktopFileLabel": "PROFILE.TXT"
         },
         "hobbies": {
           "title": "Hobbies & Personal",
-          "intro": "Outside work I recharge with hands-on and playful projects.",
+          "intro": "Outside work I recharge with playful and technical projects.",
           "items": [
-            "Gaming and game mechanics analysis",
-            "Electronics tinkering and smart home automation",
-            "Small workshop experiments and prototyping",
-            "Road trips and photographing old technology"
+            "Playing games and analyzing game mechanics",
+            "Electronics experiments and home automation",
+            "Hands-on prototyping and workshop projects",
+            "Collecting and restoring retro hardware"
           ]
         },
         "tasks": {
           "title": "Latest Events",
           "latestTitle": "Latest events",
           "latestEvents": [
-            "Landing page concept translated into interactive scene",
-            "Main office page architecture drafted and implemented",
-            "Localization structure prepared for upcoming sections"
+            "Landing screen and transition implemented",
+            "Main room composition refined to concept",
+            "Localization wired for all room interactions"
           ],
           "currentTitle": "Currently working on",
           "currentWork": [
-            "Polishing scene details and object interactions",
-            "Adding additional pages in the same visual language",
-            "Connecting portfolio content with maintainable config"
+            "Final pass on scene polish and atmosphere",
+            "Additional pages in the same visual language",
+            "Project content migration into structured config"
           ]
         }
       }
@@ -144,7 +162,7 @@
     {
       "code": "de",
       "label": "DE",
-      "pageTitle": "Peusepage | Buero Desktop",
+      "pageTitle": "Peusepage | Buero",
       "controls": {
         "mode": "Modus",
         "day": "Tag",
@@ -153,12 +171,12 @@
         "language": "Sprache"
       },
       "actionLabels": {
-        "computer": "Anwendungsfenster ueber den Computer oeffnen",
-        "keyboard": "Anwendungsfenster ueber die Tastatur oeffnen",
-        "mouse": "Anwendungsfenster ueber die Maus oeffnen",
-        "certificate": "Zertifikat und Profilfenster oeffnen",
-        "window": "Hobbyfenster oeffnen",
-        "pinboard": "Aufgabenfenster oeffnen"
+        "computer": "Anwendungsfenster ueber Computer oeffnen",
+        "keyboard": "Anwendungsfenster ueber Tastatur oeffnen",
+        "mouse": "Anwendungsfenster ueber Maus oeffnen",
+        "certificate": "Zertifikatsfenster und Profil-Links oeffnen",
+        "window": "Hobbys und persoenliche Infos oeffnen",
+        "pinboard": "Neueste Ereignisse und aktuelle Arbeit oeffnen"
       },
       "certificate": {
         "label": "Zertifikat",
@@ -171,221 +189,55 @@
       "popups": {
         "applications": {
           "title": "Anwendungen",
-          "description": "Waehle einen Eintrag, um Profil, Hobbys und Updates zu sehen.",
+          "description": "Desktop-Verknuepfungen zu allen Aktionen in diesem Raum.",
           "apps": [
             {
-              "symbol": "🧭",
+              "symbol": "🪪",
               "name": "Profil",
-              "tag": "Kurz"
+              "tag": "CV"
             },
             {
-              "symbol": "🎮",
+              "symbol": "🌿",
               "name": "Hobbys",
-              "tag": "Freizeit"
+              "tag": "Leben"
             },
             {
               "symbol": "📌",
-              "name": "Aufgaben",
-              "tag": "Aktuell"
+              "name": "Updates",
+              "tag": "Jetzt"
             }
           ]
         },
         "certificate": {
           "title": "Kurz-CV",
-          "summary": "Design-orientierter Engineer mit starkem Produktsinn, UI-Handwerk und Verantwortung von der Idee bis zum Release.",
-          "monitorHint": "Der CRT wechselte vom Screensaver auf eine symbolische Desktop-Textdatei.",
+          "summary": "Design-orientierter Engineer mit starkem Produktsinn, UI-Handwerk und Verantwortung von der Idee bis zum Livegang.",
+          "monitorHint": "Der Zertifikat-Klick schaltet den CRT vom Screensaver auf eine symbolische Desktop-Textdatei.",
           "linksTitle": "Profile und Kontakt",
           "desktopFileLabel": "PROFIL.TXT"
         },
         "hobbies": {
           "title": "Hobbys & Persoenlich",
-          "intro": "Neben der Arbeit lade ich mit praktischen und spielerischen Projekten auf.",
+          "intro": "Neben der Arbeit lade ich mit kreativen und technischen Projekten auf.",
           "items": [
             "Gaming und Analyse von Spielmechaniken",
-            "Elektronik-Bastelei und Home-Automation",
-            "Kleine Werkstatt-Experimente und Prototyping",
-            "Roadtrips und Fotografie alter Technik"
+            "Elektronik-Experimente und Home-Automation",
+            "Praktisches Prototyping in der Werkstatt",
+            "Sammeln und Restaurieren von Retro-Hardware"
           ]
         },
         "tasks": {
           "title": "Neueste Ereignisse",
           "latestTitle": "Neueste Ereignisse",
           "latestEvents": [
-            "Landingpage-Konzept in interaktive Szene ueberfuehrt",
-            "Architektur der Hauptseite geplant und umgesetzt",
-            "Lokalisierungsstruktur fuer kommende Bereiche vorbereitet"
+            "Landing-Screen und Uebergang umgesetzt",
+            "Hauptraum-Komposition auf Konzept verfeinert",
+            "Lokalisierung fuer alle Rauminteraktionen verdrahtet"
           ],
-          "currentTitle": "Derzeit in Arbeit",
+          "currentTitle": "Aktuell in Arbeit",
           "currentWork": [
-            "Szenendetails und Objektinteraktionen verfeinern",
+            "Finaler Feinschliff von Szene und Atmosphaere",
             "Weitere Seiten im gleichen Stil aufbauen",
-            "Portfolio-Inhalte mit wartbarer Konfiguration verbinden"
-          ]
-        }
-      }
-    },
-    {
-      "code": "fr",
-      "label": "FR",
-      "pageTitle": "Peusepage | Bureau Vintage",
-      "controls": {
-        "mode": "Mode",
-        "day": "Jour",
-        "night": "Nuit",
-        "theme": "Theme",
-        "language": "Langue"
-      },
-      "actionLabels": {
-        "computer": "Ouvrir les applications depuis l ordinateur",
-        "keyboard": "Ouvrir les applications depuis le clavier",
-        "mouse": "Ouvrir les applications depuis la souris",
-        "certificate": "Ouvrir le certificat et le profil",
-        "window": "Ouvrir la section loisirs",
-        "pinboard": "Ouvrir la section taches"
-      },
-      "certificate": {
-        "label": "Certificat",
-        "title": "Designer Produit",
-        "sentence": "Je cree des experiences numeriques claires avec une touche humaine et ludique."
-      },
-      "scene": {
-        "pinboardTitle": "Tableau"
-      },
-      "popups": {
-        "applications": {
-          "title": "Applications",
-          "description": "Choisissez une entree pour voir profil, loisirs et actualites.",
-          "apps": [
-            {
-              "symbol": "🧭",
-              "name": "Profil",
-              "tag": "Bio"
-            },
-            {
-              "symbol": "🎮",
-              "name": "Loisirs",
-              "tag": "Vie"
-            },
-            {
-              "symbol": "📌",
-              "name": "Taches",
-              "tag": "Actif"
-            }
-          ]
-        },
-        "certificate": {
-          "title": "CV court",
-          "summary": "Ingenieur oriente design avec une forte vision produit, un soin UI, et une execution complete du concept a la livraison.",
-          "monitorHint": "Le CRT est passe de l ecran de veille a un fichier texte symbolique sur le bureau.",
-          "linksTitle": "Profils et contact",
-          "desktopFileLabel": "PROFIL.TXT"
-        },
-        "hobbies": {
-          "title": "Loisirs & Perso",
-          "intro": "Hors travail je me ressource avec des projets ludiques et pratiques.",
-          "items": [
-            "Jeux video et analyse des mecaniques",
-            "Electronique personnelle et domotique",
-            "Petits prototypes en atelier",
-            "Road trips et photo de technologies vintage"
-          ]
-        },
-        "tasks": {
-          "title": "Evenements recents",
-          "latestTitle": "Derniers evenements",
-          "latestEvents": [
-            "Concept de la page d accueil traduit en scene interactive",
-            "Architecture de la page principale planifiee et livree",
-            "Structure de localisation preparee pour les sections suivantes"
-          ],
-          "currentTitle": "En cours",
-          "currentWork": [
-            "Affiner les details de scene et les interactions",
-            "Creer les pages suivantes dans le meme style",
-            "Connecter le contenu portfolio avec une config maintenable"
-          ]
-        }
-      }
-    },
-    {
-      "code": "es",
-      "label": "ES",
-      "pageTitle": "Peusepage | Oficina Clasica",
-      "controls": {
-        "mode": "Modo",
-        "day": "Dia",
-        "night": "Noche",
-        "theme": "Tema",
-        "language": "Idioma"
-      },
-      "actionLabels": {
-        "computer": "Abrir aplicaciones desde el ordenador",
-        "keyboard": "Abrir aplicaciones desde el teclado",
-        "mouse": "Abrir aplicaciones desde el raton",
-        "certificate": "Abrir certificado y perfil",
-        "window": "Abrir informacion personal",
-        "pinboard": "Abrir tareas actuales"
-      },
-      "certificate": {
-        "label": "Certificado",
-        "title": "Disenador de Producto",
-        "sentence": "Creo experiencias digitales claras con una sensibilidad humana y creativa."
-      },
-      "scene": {
-        "pinboardTitle": "Tablero"
-      },
-      "popups": {
-        "applications": {
-          "title": "Aplicaciones",
-          "description": "Elige una entrada para ver perfil, hobbies y novedades.",
-          "apps": [
-            {
-              "symbol": "🧭",
-              "name": "Perfil",
-              "tag": "CV"
-            },
-            {
-              "symbol": "🎮",
-              "name": "Hobbies",
-              "tag": "Vida"
-            },
-            {
-              "symbol": "📌",
-              "name": "Tareas",
-              "tag": "Ahora"
-            }
-          ]
-        },
-        "certificate": {
-          "title": "CV corto",
-          "summary": "Ingeniero orientado al diseno con criterio de producto, detalle visual y ejecucion desde concepto hasta lanzamiento.",
-          "monitorHint": "El CRT cambio del salvapantallas a un archivo de texto simbolico en el escritorio.",
-          "linksTitle": "Perfiles y contacto",
-          "desktopFileLabel": "PERFIL.TXT"
-        },
-        "hobbies": {
-          "title": "Hobbies y personal",
-          "intro": "Fuera del trabajo recargo energia con proyectos practicos y creativos.",
-          "items": [
-            "Videojuegos y analisis de mecanicas",
-            "Electronica y automatizacion del hogar",
-            "Prototipos pequenos en taller",
-            "Viajes por carretera y fotografia de tecnologia retro"
-          ]
-        },
-        "tasks": {
-          "title": "Eventos recientes",
-          "latestTitle": "Ultimos eventos",
-          "latestEvents": [
-            "Concepto de landing convertido en escena interactiva",
-            "Arquitectura de la pagina principal definida e implementada",
-            "Base de localizacion preparada para proximas secciones"
-          ],
-          "currentTitle": "Trabajando en",
-          "currentWork": [
-            "Pulir detalles visuales e interacciones",
-            "Construir nuevas paginas en el mismo lenguaje visual",
-            "Conectar contenido de portfolio con configuracion mantenible"
+            "Projektinhalte in strukturierte Konfiguration ueberfuehren"
           ]
         }
       }

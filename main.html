@@ -8,46 +8,65 @@
   </head>
   <body data-mode="day">
     <main class="monitor-frame" aria-label="Monitor frame">
-      <section id="office-scene" class="office-scene" aria-label="Old office scene">
-        <div class="scene-backdrop">
-          <div class="back-wall"></div>
-          <div class="right-wall"></div>
+      <section id="office-scene" class="office-scene" aria-label="Warm retro office scene">
+        <div class="wall-main"></div>
+        <div class="wall-right"></div>
+        <div class="room-shadow"></div>
 
-          <button id="window-action" class="object-button object-window actionable" type="button" aria-label="">
-            <div class="outside-sky"></div>
-            <div class="outside-hill"></div>
-            <div class="outside-tree"></div>
-            <div class="outside-car"></div>
-            <div class="outside-ball"></div>
-          </button>
+        <button id="window-action" class="object-button object-window actionable" type="button" aria-label="">
+          <div class="window-pane window-sky"></div>
+          <div class="window-pane window-field"></div>
+          <div class="window-tree"></div>
+          <div class="window-car"></div>
+          <div class="window-ball"></div>
+        </button>
 
-          <div class="certificate-thread"></div>
-          <button id="certificate-action" class="object-button object-certificate actionable" type="button" aria-label="">
-            <article class="certificate-card">
-              <p id="certificate-label" class="certificate-label"></p>
-              <h1 id="certificate-name" class="certificate-name"></h1>
-              <p id="certificate-title" class="certificate-title"></p>
-              <p id="certificate-sentence" class="certificate-sentence"></p>
-            </article>
-          </button>
+        <div class="hanging-thread"></div>
+        <button id="certificate-action" class="object-button object-certificate actionable" type="button" aria-label="">
+          <article class="certificate-card">
+            <p id="certificate-label" class="certificate-label"></p>
+            <h1 id="certificate-name" class="certificate-name"></h1>
+            <p id="certificate-title" class="certificate-title"></p>
+            <p id="certificate-sentence" class="certificate-sentence"></p>
+          </article>
+        </button>
 
-          <button id="pinboard-action" class="object-button object-pinboard actionable" type="button" aria-label="">
-            <h2 id="pinboard-title" class="pinboard-title"></h2>
-            <div class="pin-note note-a"></div>
-            <div class="pin-note note-b"></div>
-            <div class="pin-note note-c"></div>
-          </button>
+        <button id="pinboard-action" class="object-button object-pinboard actionable" type="button" aria-label="">
+          <h2 id="pinboard-title" class="pinboard-title"></h2>
+          <div class="pin-note note-a"></div>
+          <div class="pin-note note-b"></div>
+          <div class="pin-note note-c"></div>
+          <div class="pin-note note-d"></div>
+        </button>
+
+        <div class="bookshelf" aria-hidden="true">
+          <span class="book b1"></span>
+          <span class="book b2"></span>
+          <span class="book b3"></span>
+          <span class="book b4"></span>
+          <span class="plant"></span>
         </div>
 
         <section class="desk-zone" aria-label="Desk foreground">
+          <div class="desk-top"></div>
+          <div class="desk-front"></div>
           <div class="chair"></div>
-          <div class="desk-surface"></div>
+
+          <div class="desk-clutter" aria-hidden="true">
+            <span class="notebook"></span>
+            <span class="pen-cup"></span>
+            <span class="paper-stack"></span>
+          </div>
 
           <button id="computer-action" class="object-button object-computer actionable" type="button" aria-label="">
             <div class="crt-body">
-              <div id="crt-screen" class="crt-screen" data-theme="matrix-green">
-                <div id="crt-saver" class="crt-saver"></div>
-                <div id="crt-desktop" class="crt-desktop" hidden>
+              <div id="crt-screen" class="crt-screen" data-theme="aurora">
+                <div id="crt-saver" class="crt-saver">
+                  <span class="saver-orb orb-a"></span>
+                  <span class="saver-orb orb-b"></span>
+                  <span class="saver-orb orb-c"></span>
+                </div>
+                <div id="crt-desktop" class="crt-desktop">
                   <p id="desktop-file-name" class="desktop-file-name"></p>
                   <div class="desktop-line line-1"></div>
                   <div class="desktop-line line-2"></div>
@@ -75,6 +94,7 @@
 
           <div class="coffee">
             <div class="coffee-cup"></div>
+            <div class="coffee-handle"></div>
             <span class="steam steam-a"></span>
             <span class="steam steam-b"></span>
             <span class="steam steam-c"></span>
