@@ -8,22 +8,13 @@
   --popup-bg: #d9d9d9;
   --popup-text: #171717;
   --highlight: #ffd56e;
-  --room-main-top: #a78456;
-  --room-main-bottom: #6a4a31;
-  --room-right-top: #8b6947;
-  --room-right-bottom: #5c432d;
-  --desk-top: #7b5536;
-  --desk-front: #553922;
-  --window-sky-top: #9fd3ff;
-  --window-sky-bottom: #ddefff;
-  --window-ground-top: #82af6c;
-  --window-ground-bottom: #568947;
-  --window-tree-top: #33773b;
-  --window-tree-bottom: #204f2a;
-  --window-ball-top: #ffec9d;
-  --window-ball-bottom: #e0b74f;
-  --window-car-top: #df6255;
-  --window-car-bottom: #a53f35;
+  --room-main-top: #a78557;
+  --room-main-bottom: #6b4b32;
+  --room-right-top: #90704f;
+  --room-right-bottom: #5b442f;
+  --desk-top: #7a5739;
+  --desk-front: #573a24;
+  --scene-text: #f7f2eb;
 }
 
 *,
@@ -40,7 +31,7 @@ body {
 
 body {
   font-family: "Trebuchet MS", "Verdana", system-ui, sans-serif;
-  color: #f7f2eb;
+  color: var(--scene-text);
   background: #0f1014;
 }
 
@@ -57,68 +48,70 @@ body {
 }
 
 .office-scene {
-  --window-x: 5%;
-  --window-y: 16%;
-  --window-w: 34%;
+  --window-x: 6%;
+  --window-y: 15%;
+  --window-w: 28%;
   --window-h: 34%;
   --thread-left: 30%;
   --thread-right: 30%;
-  --thread-y: 12%;
-  --certificate-y: 13.1%;
-  --certificate-w: min(295px, 30vw);
-  --certificate-min-w: 210px;
-  --pinboard-x: 68%;
+  --thread-y: 10.5%;
+  --certificate-y: 11.5%;
+  --certificate-w: min(320px, 29vw);
+  --certificate-min-w: 200px;
+  --pinboard-x: 69%;
   --pinboard-y: 24%;
   --pinboard-w: 20%;
-  --pinboard-h: 25%;
-  --computer-x: 49.5%;
-  --computer-bottom: 25%;
+  --pinboard-h: 26%;
+  --computer-x: 50%;
+  --computer-bottom: 24%;
   --computer-w: 24%;
-  --crt-left: 17%;
-  --crt-right: 19%;
-  --crt-top: 17%;
-  --crt-bottom: 34%;
-  --keyboard-x: 49%;
-  --keyboard-bottom: 12.5%;
-  --keyboard-w: 23%;
-  --keyboard-h: 8%;
-  --mouse-x: 74.5%;
-  --mouse-bottom: 13.4%;
-  --mouse-w: 5.2%;
-  --mouse-h: 7.2%;
-  --lamp-x: 66.5%;
-  --lamp-bottom: 16.2%;
-  --lamp-w: 13.8%;
-  --lamp-h: 41%;
+  --crt-left: 13%;
+  --crt-right: 14%;
+  --crt-top: 13%;
+  --crt-bottom: 25%;
+  --keyboard-x: 51%;
+  --keyboard-bottom: 13.2%;
+  --keyboard-w: 22%;
+  --keyboard-h: 9%;
+  --mousepad-x: 74%;
+  --mousepad-bottom: 13%;
+  --mousepad-w: 11.5%;
+  --mousepad-h: 11%;
+  --mouse-x: 77%;
+  --mouse-bottom: 15%;
+  --mouse-w: 4.8%;
+  --mouse-h: 7%;
+  --lamp-x: 66%;
+  --lamp-bottom: 16%;
+  --lamp-w: 14%;
+  --lamp-h: 43%;
+  --coffee-x: 30%;
+  --coffee-bottom: 14%;
+  --coffee-w: clamp(74px, 7.8vw, 110px);
   position: absolute;
   inset: 14px 14px 78px;
   overflow: hidden;
   border: 3px solid var(--screen-border);
-  background:
-    linear-gradient(180deg, rgb(255 210 150 / 8%), rgb(0 0 0 / 12%)),
-    url("../img/office-colored.png") center / cover no-repeat;
-}
-
-.office-scene::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgb(255 226 179 / 12%), rgb(24 16 10 / 22%));
-  z-index: 1;
+  background: linear-gradient(180deg, #5f422d 0%, #3c2a1c 100%);
 }
 
 .trace-overlay {
   position: absolute;
   inset: 0;
-  z-index: 9;
+  z-index: 20;
   pointer-events: none;
   opacity: 0;
   transition: opacity 120ms linear;
+}
+
+.trace-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
     repeating-linear-gradient(
       to right,
-      rgb(97 215 255 / 35%) 0 1px,
+      rgb(93 210 255 / 35%) 0 1px,
       transparent 1px calc(100% / 12)
     ),
     repeating-linear-gradient(
@@ -132,6 +125,67 @@ body[data-trace="on"] .trace-overlay {
   opacity: 1;
 }
 
+body[data-trace="on"] .trace-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/office-colored.png") center / contain no-repeat;
+  opacity: 0.5;
+}
+
+.wall-main {
+  position: absolute;
+  inset: 0 11% 34% 0;
+  background:
+    radial-gradient(circle at 22% 18%, rgb(255 231 178 / 24%), transparent 35%),
+    radial-gradient(circle at 70% 30%, rgb(255 236 188 / 16%), transparent 35%),
+    linear-gradient(180deg, var(--room-main-top), var(--room-main-bottom));
+  z-index: 1;
+}
+
+.wall-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12%;
+  height: 67%;
+  border-left: 2px solid rgb(0 0 0 / 35%);
+  background: linear-gradient(180deg, var(--room-right-top), var(--room-right-bottom));
+  z-index: 1;
+}
+
+.room-shadow {
+  position: absolute;
+  left: 34%;
+  right: 8%;
+  top: 30%;
+  height: 36%;
+  background: radial-gradient(ellipse, rgb(0 0 0 / 26%), rgb(0 0 0 / 0%) 72%);
+  z-index: 2;
+}
+
+.object-button {
+  position: absolute;
+  border: 2px solid transparent;
+  color: inherit;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.actionable {
+  transition: box-shadow 160ms ease, border-color 160ms ease, filter 160ms ease;
+}
+
+.actionable:hover,
+.actionable:focus-visible {
+  outline: none;
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 35%), 0 0 12px rgb(255 213 110 / 62%);
+  filter: brightness(1.06);
+}
+
 body[data-trace="on"] .object-button {
   border-color: rgb(66 233 255 / 85%);
   box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
@@ -141,9 +195,8 @@ body[data-trace="on"] .object-button::after {
   content: attr(data-hotspot);
   position: absolute;
   left: 0;
-  top: -18px;
-  font-size: 11px;
-  line-height: 1;
+  top: -17px;
+  font-size: 10px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #0a1a24;
@@ -153,74 +206,62 @@ body[data-trace="on"] .object-button::after {
   pointer-events: none;
 }
 
-.wall-main {
-  display: none;
-}
-
-.wall-right {
-  display: none;
-}
-
-.room-shadow {
-  display: none;
-}
-
-.object-button {
-  position: absolute;
-  border: 2px solid transparent;
-  background: transparent;
-  color: inherit;
-  padding: 0;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.actionable {
-  transition: box-shadow 160ms ease, border-color 160ms ease, filter 160ms ease, transform 160ms ease;
-}
-
-.actionable:hover,
-.actionable:focus-visible {
-  outline: none;
-  border-color: var(--highlight);
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 34%), 0 0 14px rgb(255 213 110 / 70%);
-  filter: brightness(1.12);
-}
-
 .object-window {
   left: var(--window-x);
   top: var(--window-y);
   width: var(--window-w);
   height: var(--window-h);
-  z-index: 3;
+  border: 4px solid #7e5d3f;
+  border-top-color: #a98662;
+  border-left-color: #a98662;
+  background: linear-gradient(180deg, #6f5035, #4e3928);
 }
 
 .window-pane {
-  display: none;
+  position: absolute;
+  left: 8%;
+  right: 8%;
 }
 
 .window-sky {
   top: 8%;
   bottom: 46%;
-  background: linear-gradient(180deg, var(--window-sky-top), var(--window-sky-bottom));
+  background: linear-gradient(180deg, #9fd3ff, #deefff);
 }
 
 .window-field {
   top: 54%;
   bottom: 8%;
-  background: linear-gradient(180deg, var(--window-ground-top), var(--window-ground-bottom));
+  background: linear-gradient(180deg, #82af6c, #568947);
 }
 
 .window-tree {
-  display: none;
+  position: absolute;
+  left: 16%;
+  bottom: 24%;
+  width: 8%;
+  height: 24%;
+  background: linear-gradient(180deg, #33773b, #204f2a);
 }
 
 .window-car {
-  display: none;
+  position: absolute;
+  right: 20%;
+  bottom: 18%;
+  width: 20%;
+  height: 10%;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #df6255, #a53f35);
 }
 
 .window-ball {
-  display: none;
+  position: absolute;
+  right: 10%;
+  bottom: 13%;
+  width: 8%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffec9d, #e0b74f);
 }
 
 .hanging-thread {
@@ -229,9 +270,9 @@ body[data-trace="on"] .object-button::after {
   right: var(--thread-right);
   top: var(--thread-y);
   height: 2px;
-  background: #f3dfbf;
-  opacity: 0.55;
-  z-index: 3;
+  background: #f2debf;
+  opacity: 0.75;
+  z-index: 4;
 }
 
 .object-certificate {
@@ -240,19 +281,19 @@ body[data-trace="on"] .object-button::after {
   width: var(--certificate-w);
   min-width: var(--certificate-min-w);
   transform: translateX(-50%);
-  z-index: 4;
+  z-index: 6;
 }
 
 .certificate-card {
   width: 100%;
   text-align: center;
   color: #2b2012;
-  background: linear-gradient(180deg, rgb(249 236 202 / 90%), rgb(230 210 162 / 90%));
+  background: linear-gradient(180deg, #f9ecca, #e6d2a2);
   border: 3px solid #8f7446;
   box-shadow:
     inset 0 0 0 2px #ddca9d,
     0 8px 16px rgb(0 0 0 / 26%);
-  padding: 8px 10px;
+  padding: 10px 12px;
 }
 
 .certificate-label {
@@ -283,22 +324,25 @@ body[data-trace="on"] .object-button::after {
   top: var(--pinboard-y);
   width: var(--pinboard-w);
   height: var(--pinboard-h);
-  z-index: 3;
+  border: 4px solid #775536;
+  border-top-color: #9c754f;
+  border-left-color: #9c754f;
+  background: linear-gradient(180deg, #bc925e, #9a7148);
+  padding: 8px;
 }
 
 .pinboard-title {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+  margin: 0;
+  text-align: center;
+  font-size: 0.86rem;
+  color: #26190f;
 }
 
 .pin-note {
-  display: none;
+  position: absolute;
+  width: 29%;
+  height: 20%;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 18%);
 }
 
 .note-a {
@@ -326,11 +370,22 @@ body[data-trace="on"] .object-button::after {
 }
 
 .bookshelf {
-  display: none;
+  position: absolute;
+  right: 2.5%;
+  top: 9%;
+  width: 10%;
+  height: 10%;
+  border: 2px solid rgb(0 0 0 / 30%);
+  border-top-color: rgb(255 219 169 / 20%);
+  background: linear-gradient(180deg, #7a5a3d, #5c432e);
+  z-index: 3;
 }
 
 .book {
-  display: none;
+  position: absolute;
+  bottom: 14%;
+  width: 10%;
+  border-radius: 2px;
 }
 
 .b1 {
@@ -358,7 +413,15 @@ body[data-trace="on"] .object-button::after {
 }
 
 .plant {
-  display: none;
+  position: absolute;
+  right: 8%;
+  bottom: 18%;
+  width: 22%;
+  height: 64%;
+  background:
+    radial-gradient(circle at 30% 24%, #9bcf77, transparent 34%),
+    radial-gradient(circle at 66% 30%, #76a95a, transparent 37%),
+    linear-gradient(180deg, #6b5a44 72%, #4f3a28 72%);
 }
 
 .desk-zone {
@@ -367,35 +430,77 @@ body[data-trace="on"] .object-button::after {
   right: 0;
   bottom: 0;
   height: 48%;
-  z-index: 3;
+  z-index: 4;
 }
 
 .desk-top {
-  display: none;
+  position: absolute;
+  inset: 34% 0 42% 0;
+  border-top: 2px solid rgb(255 226 181 / 24%);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0%) 0 20px,
+      rgb(255 255 255 / 4%) 20px 26px
+    ),
+    linear-gradient(180deg, var(--desk-top), #63452d);
 }
 
 .desk-front {
-  display: none;
+  position: absolute;
+  inset: 58% 0 0;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0%), rgb(0 0 0 / 20%)),
+    linear-gradient(180deg, #624027, var(--desk-front));
 }
 
 .chair {
-  display: none;
+  position: absolute;
+  left: 38%;
+  bottom: 27%;
+  width: 12%;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px 22px 10px 10px;
+  background: linear-gradient(180deg, #5a3322, #2a170f);
+  box-shadow: 0 6px 10px rgb(0 0 0 / 30%);
 }
 
 .desk-clutter {
-  display: none;
+  position: absolute;
+  left: 18%;
+  bottom: 29%;
+  width: 17%;
+  height: 17%;
 }
 
 .notebook {
-  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 8%;
+  width: 45%;
+  height: 48%;
+  background: linear-gradient(180deg, #ad7f58, #7b5638);
+  border: 2px solid #5e412a;
 }
 
 .pen-cup {
-  display: none;
+  position: absolute;
+  left: 49%;
+  bottom: 12%;
+  width: 17%;
+  height: 42%;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #a89ea8, #6c6470);
 }
 
 .paper-stack {
-  display: none;
+  position: absolute;
+  left: 68%;
+  bottom: 18%;
+  width: 30%;
+  height: 35%;
+  background: linear-gradient(180deg, #efe3c8, #cfbfa0);
+  border: 1px solid rgb(0 0 0 / 18%);
 }
 
 .object-computer {
@@ -403,15 +508,16 @@ body[data-trace="on"] .object-button::after {
   bottom: var(--computer-bottom);
   width: var(--computer-w);
   aspect-ratio: 4 / 3;
-  z-index: 4;
 }
 
 .crt-body {
   position: absolute;
   inset: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
+  border: 4px solid #5e5e5e;
+  border-right-color: #e2e2e2;
+  border-bottom-color: #e2e2e2;
+  background: linear-gradient(180deg, #d1cfcb, #8f8e8b);
+  box-shadow: 8px 8px 0 rgb(0 0 0 / 24%);
 }
 
 .crt-screen {
@@ -423,7 +529,6 @@ body[data-trace="on"] .object-button::after {
   border: 3px solid #232323;
   border-radius: 3px;
   overflow: hidden;
-  box-shadow: 0 0 0 2px rgb(0 0 0 / 20%);
 }
 
 .crt-screen[data-theme="aurora"] {
@@ -571,7 +676,12 @@ body[data-trace="on"] .object-button::after {
 }
 
 .crt-stand {
-  display: none;
+  position: absolute;
+  left: 42%;
+  bottom: 8%;
+  width: 16%;
+  height: 13%;
+  background: linear-gradient(180deg, #7a7a7a, #4c4c4c);
 }
 
 .object-keyboard {
@@ -579,15 +689,31 @@ body[data-trace="on"] .object-button::after {
   bottom: var(--keyboard-bottom);
   width: var(--keyboard-w);
   height: var(--keyboard-h);
-  z-index: 4;
+  border-radius: 7px;
+  border: 2px solid #5f5f5f;
+  background: linear-gradient(180deg, #dadada, #a8a8a8);
 }
 
 .keyboard-detail {
-  display: none;
+  position: absolute;
+  inset: 24% 8%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgb(0 0 0 / 0%) 0 9px,
+      rgb(0 0 0 / 28%) 9px 10px
+    );
 }
 
 .mousepad {
-  display: none;
+  position: absolute;
+  left: var(--mousepad-x);
+  bottom: var(--mousepad-bottom);
+  width: var(--mousepad-w);
+  height: var(--mousepad-h);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #2f5574, #1a394f);
+  z-index: 4;
 }
 
 .object-mouse {
@@ -595,7 +721,9 @@ body[data-trace="on"] .object-button::after {
   bottom: var(--mouse-bottom);
   width: var(--mouse-w);
   height: var(--mouse-h);
-  z-index: 4;
+  border-radius: 50% 50% 45% 45%;
+  border: 2px solid #666;
+  background: linear-gradient(180deg, #f2f2f2, #bcbcbc);
 }
 
 .lamp {
@@ -608,15 +736,32 @@ body[data-trace="on"] .object-button::after {
 }
 
 .lamp-shade {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 16%;
+  width: 56%;
+  height: 22%;
+  border-radius: 10px 10px 22px 22px;
+  background: linear-gradient(180deg, #d2b266, #8a6f31);
 }
 
 .lamp-neck {
-  display: none;
+  position: absolute;
+  top: 18%;
+  left: 44%;
+  width: 8%;
+  height: 56%;
+  background: linear-gradient(180deg, #7e7e7e, #4d4d4d);
 }
 
 .lamp-base {
-  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 28%;
+  width: 42%;
+  height: 14%;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #666, #353535);
 }
 
 .lamp-glow {
@@ -632,19 +777,45 @@ body[data-trace="on"] .object-button::after {
 }
 
 .coffee {
-  display: none;
+  position: absolute;
+  left: var(--coffee-x);
+  bottom: var(--coffee-bottom);
+  width: var(--coffee-w);
+  aspect-ratio: 1 / 1;
+  z-index: 4;
 }
 
 .coffee-cup {
-  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70%;
+  height: 56%;
+  border-radius: 0 0 8px 8px;
+  border: 2px solid #6a4a2f;
+  background: linear-gradient(180deg, #eadfca, #c0af94);
 }
 
 .coffee-handle {
-  display: none;
+  position: absolute;
+  left: 64%;
+  bottom: 14%;
+  width: 24%;
+  height: 30%;
+  border: 2px solid #6a4a2f;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
 }
 
 .steam {
-  display: none;
+  position: absolute;
+  bottom: 50%;
+  width: 11px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 38%);
+  border-bottom: 0;
+  opacity: 0.58;
 }
 
 .steam-a {
@@ -709,6 +880,7 @@ body[data-trace="on"] .object-button::after {
   display: grid;
   place-items: center;
   background: rgb(10 10 12 / 34%);
+  animation: popup-fade-in 120ms ease-out;
 }
 
 .popup-window {
@@ -721,6 +893,7 @@ body[data-trace="on"] .object-button::after {
   background: var(--popup-bg);
   color: var(--popup-text);
   box-shadow: 10px 10px 0 rgb(0 0 0 / 28%);
+  animation: popup-pop 140ms ease-out;
 }
 
 .popup-header {
@@ -816,22 +989,12 @@ body[data-trace="on"] .object-button::after {
 }
 
 body[data-mode="night"] {
-  --room-main-top: #3f3346;
+  --room-main-top: #403549;
   --room-main-bottom: #281f35;
   --room-right-top: #332a46;
   --room-right-bottom: #231d31;
   --desk-top: #573927;
   --desk-front: #352116;
-  --window-sky-top: #1a2950;
-  --window-sky-bottom: #2c447f;
-  --window-ground-top: #39573f;
-  --window-ground-bottom: #2a3f31;
-  --window-tree-top: #5e8f63;
-  --window-tree-bottom: #3f6844;
-  --window-ball-top: #f8fbff;
-  --window-ball-bottom: #c8d0e6;
-  --window-car-top: #8f3d55;
-  --window-car-bottom: #6c2e40;
 }
 
 body[data-mode="night"] .monitor-frame {
@@ -841,8 +1004,20 @@ body[data-mode="night"] .monitor-frame {
   border-left-color: #5b5b5b;
 }
 
-body[data-mode="night"] .office-scene::before {
-  background: linear-gradient(180deg, rgb(17 26 55 / 34%), rgb(4 8 24 / 52%));
+body[data-mode="night"] .object-window .window-sky {
+  background: linear-gradient(180deg, #1a2950, #2c447f);
+}
+
+body[data-mode="night"] .object-window .window-field {
+  background: linear-gradient(180deg, #39573f, #2a3f31);
+}
+
+body[data-mode="night"] .window-ball {
+  background: radial-gradient(circle at 30% 30%, #f8fbff, #c8d0e6);
+}
+
+body[data-mode="night"] .window-car {
+  background: linear-gradient(180deg, #8f3d55, #6c2e40);
 }
 
 body[data-mode="night"] .lamp-glow {
@@ -934,11 +1109,33 @@ body[data-mode="night"] .control-button {
   }
 }
 
+@keyframes popup-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .crt-screen[data-theme],
   .crt-saver::before,
   .saver-orb,
-  .steam {
+  .steam,
+  .popup-overlay,
+  .popup-window {
     animation: none;
   }
 }
@@ -946,11 +1143,12 @@ body[data-mode="night"] .control-button {
 @media (max-width: 1020px) {
   .office-scene {
     inset: 10px 10px 76px;
-    --window-w: 36%;
-    --certificate-w: min(340px, 42vw);
-    --pinboard-w: 28%;
+    --window-w: 32%;
+    --certificate-w: min(300px, 40vw);
+    --pinboard-w: 24%;
     --computer-w: 28%;
     --keyboard-w: 24%;
+    --mousepad-w: 12%;
   }
 }
 
@@ -963,20 +1161,33 @@ body[data-mode="night"] .control-button {
     inset: 8px 8px 102px;
     --window-w: 44%;
     --window-h: 30%;
-    --certificate-y: 9%;
+    --certificate-y: 9.5%;
     --certificate-w: 52%;
     --certificate-min-w: 180px;
-    --pinboard-x: 61%;
+    --pinboard-x: 60%;
     --pinboard-y: 22%;
     --pinboard-w: 35%;
+    --pinboard-h: 27%;
     --computer-x: 44%;
     --computer-w: 40%;
     --keyboard-x: 45%;
     --keyboard-w: 32%;
+    --mousepad-x: 79%;
+    --mousepad-w: 16%;
     --mouse-x: 84%;
     --mouse-w: 5.6%;
     --lamp-x: 16%;
     --lamp-w: 22%;
+    --coffee-x: 6%;
+  }
+
+  .wall-right,
+  .bookshelf {
+    display: none;
+  }
+
+  .desk-zone {
+    height: 54%;
   }
 
   .screen-controls {
