@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Monitor</title>
+    <link rel="stylesheet" href="assets/css/landing.css" />
+  </head>
+  <body data-mode="light">
+    <main class="monitor-frame" aria-label="Monitor frame">
+      <section
+        id="screen"
+        class="screen"
+        data-theme="aurora"
+        aria-label="Landing screen. Click to open desktop."
+        role="button"
+        tabindex="0"
+      >
+        <div class="screen-overlay"></div>
+
+        <article id="certificate" class="certificate" aria-live="polite">
+          <p id="certificate-label" class="certificate-label">Certificate</p>
+          <h1 id="certificate-name" class="certificate-name"></h1>
+          <p id="certificate-title" class="certificate-title"></p>
+          <p id="certificate-sentence" class="certificate-sentence"></p>
+        </article>
+
+        <p id="welcome-text" class="welcome-text" aria-live="polite">Welcome</p>
+        <p id="enter-hint" class="enter-hint">Click screen to continue</p>
+      </section>
+
+      <section class="screen-controls" aria-label="Screen controls">
+        <button id="darkmode-button" class="control-button" type="button" aria-pressed="false">Dark mode</button>
+        <button id="theme-button" class="control-button" type="button">Theme</button>
+        <button id="language-button" class="control-button" type="button">Language</button>
+      </section>
+    </main>
+
+    <div id="transition-layer" class="transition-layer" aria-hidden="true">
+      <p id="transition-message"></p>
+    </div>
+
+    <script type="module" src="assets/js/landing.js"></script>
+  </body>
+</html>

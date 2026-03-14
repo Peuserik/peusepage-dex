@@ -1,0 +1,311 @@
+:root {
+  --bezel-light: #dbdbdb;
+  --bezel-mid: #9b9b9b;
+  --bezel-dark: #2d2d2d;
+  --screen-border: #1a1a1a;
+  --text-light: #f7f8ff;
+  --text-dark: #15161c;
+  --card-paper: #f4e6be;
+  --card-ink: #2b2112;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Trebuchet MS", "Verdana", system-ui, sans-serif;
+  background: #111;
+  color: var(--text-light);
+}
+
+.monitor-frame {
+  position: fixed;
+  inset: 0;
+  border: 10px solid var(--bezel-dark);
+  border-top-color: #3a3a3a;
+  border-left-color: #3a3a3a;
+  background: linear-gradient(145deg, var(--bezel-light), var(--bezel-mid));
+  box-shadow:
+    inset 0 2px 8px rgb(255 255 255 / 30%),
+    inset 0 -16px 20px rgb(0 0 0 / 28%);
+}
+
+.screen {
+  position: absolute;
+  inset: 16px 16px 84px;
+  border: 3px solid var(--screen-border);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 320ms ease, filter 320ms ease, opacity 320ms ease;
+}
+
+.screen-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgb(255 255 255 / 12%) 0%,
+      rgb(255 255 255 / 0%) 30%,
+      rgb(0 0 0 / 10%) 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(0 0 0 / 0%) 0 3px,
+      rgb(0 0 0 / 9%) 3px 4px
+    );
+}
+
+.screen[data-theme="aurora"] {
+  background:
+    radial-gradient(circle at 15% 20%, rgb(173 232 255 / 58%), transparent 42%),
+    radial-gradient(circle at 72% 35%, rgb(121 91 255 / 45%), transparent 45%),
+    linear-gradient(135deg, #10245e, #274f9f 42%, #49b5e2);
+  animation: drift-a 16s linear infinite alternate;
+}
+
+.screen[data-theme="sunset"] {
+  background:
+    radial-gradient(circle at 80% 14%, rgb(255 221 171 / 58%), transparent 38%),
+    radial-gradient(circle at 30% 70%, rgb(255 118 172 / 40%), transparent 42%),
+    linear-gradient(140deg, #4d307d, #bc4d79 48%, #f5a35f);
+  animation: drift-b 15s ease-in-out infinite alternate;
+}
+
+.screen[data-theme="matrix"] {
+  background:
+    radial-gradient(circle at 70% 20%, rgb(148 255 203 / 20%), transparent 36%),
+    linear-gradient(160deg, #02110e, #093e2f 45%, #1e7f5d);
+  animation: drift-c 14s ease-in-out infinite alternate;
+}
+
+.certificate {
+  position: absolute;
+  left: 50%;
+  top: clamp(24px, 8vh, 86px);
+  width: min(700px, 82vw);
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--card-ink);
+  background: linear-gradient(180deg, #f8edcb 0%, var(--card-paper) 100%);
+  border: 3px solid #a3884f;
+  box-shadow:
+    inset 0 0 0 2px #e8d8aa,
+    0 10px 22px rgb(0 0 0 / 28%);
+  padding: 20px 24px;
+}
+
+.certificate-label {
+  margin: 0 0 6px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.certificate-name {
+  margin: 0;
+  font-size: clamp(1.35rem, 3.2vw, 2.2rem);
+}
+
+.certificate-title {
+  margin: 6px 0 0;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+}
+
+.certificate-sentence {
+  margin: 10px 0 0;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+.welcome-text {
+  position: absolute;
+  left: 50%;
+  top: clamp(220px, 54vh, 68%);
+  transform: translateX(-50%);
+  margin: 0;
+  text-align: center;
+  width: min(90vw, 900px);
+  font-size: clamp(2.8rem, 9vw, 6.2rem);
+  color: #f9fbff;
+  text-shadow: 0 4px 10px rgb(0 0 0 / 38%);
+  transition: font-family 260ms ease, opacity 260ms ease;
+}
+
+.enter-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(247 249 255 / 90%);
+}
+
+.screen-controls {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.control-button {
+  border: 2px solid #4f4f4f;
+  border-right-color: #efefef;
+  border-bottom-color: #efefef;
+  background: linear-gradient(180deg, #e5e5e5, #c9c9c9);
+  color: #111;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.control-button:hover,
+.control-button:focus-visible {
+  background: linear-gradient(180deg, #f7f7f7, #d7d7d7);
+}
+
+.control-button:active {
+  border-top-color: #efefef;
+  border-left-color: #efefef;
+  border-right-color: #4f4f4f;
+  border-bottom-color: #4f4f4f;
+}
+
+.transition-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: #000;
+  color: #84f0ff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 340ms ease;
+}
+
+body[data-mode="dark"] .monitor-frame {
+  background: linear-gradient(145deg, #3f3f3f, #1f1f1f);
+  border-color: #0d0d0d;
+  border-top-color: #5b5b5b;
+  border-left-color: #5b5b5b;
+}
+
+body[data-mode="dark"] .certificate {
+  background: linear-gradient(180deg, #6d5f3f 0%, #4e4126 100%);
+  border-color: #b59d66;
+  color: #f5ebd4;
+}
+
+body[data-mode="dark"] .control-button {
+  border-color: #1f1f1f;
+  border-right-color: #8e8e8e;
+  border-bottom-color: #8e8e8e;
+  background: linear-gradient(180deg, #525252, #363636);
+  color: #f3f3f3;
+}
+
+body.is-transitioning .screen {
+  animation: wake-to-desktop 900ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+body.is-transitioning .transition-layer {
+  opacity: 1;
+}
+
+body.is-transitioning .screen-controls {
+  opacity: 0;
+}
+
+@keyframes drift-a {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 8% 6%, -8% 12%, 0% 0%;
+  }
+}
+
+@keyframes drift-b {
+  0% {
+    background-position: 0% 0%, 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: -6% 4%, 8% -10%, 0% 0%;
+  }
+}
+
+@keyframes drift-c {
+  0% {
+    background-position: 0% 0%, 0% 0%;
+  }
+  100% {
+    background-position: 0% 12%, 0% 0%;
+  }
+}
+
+@keyframes wake-to-desktop {
+  0% {
+    filter: brightness(1) blur(0);
+    transform: scale(1);
+  }
+  42% {
+    filter: brightness(1.3) blur(0.6px);
+    transform: scale(1.01);
+  }
+  100% {
+    filter: brightness(0) blur(6px);
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen[data-theme],
+  .welcome-text,
+  body.is-transitioning .screen,
+  .transition-layer {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .monitor-frame {
+    border-width: 6px;
+  }
+
+  .screen {
+    inset: 10px 10px 80px;
+  }
+
+  .certificate {
+    width: min(95vw, 700px);
+    padding: 16px;
+  }
+
+  .screen-controls {
+    left: 10px;
+    right: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}

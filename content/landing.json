@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Peusepage Landing Screen",
+    "mainPage": "main.html",
+    "enterHint": "Click on the screen to open desktop"
+  },
+  "certificate": {
+    "name": "Alex Peuse",
+    "label": "Certificate"
+  },
+  "controls": {
+    "darkModeLabel": "Mode",
+    "themeLabel": "Theme",
+    "languageLabel": "Language",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "themes": [
+    {
+      "id": "aurora",
+      "label": "Aurora"
+    },
+    {
+      "id": "sunset",
+      "label": "Sunset"
+    },
+    {
+      "id": "matrix",
+      "label": "Matrix"
+    }
+  ],
+  "languages": [
+    {
+      "code": "en",
+      "label": "EN",
+      "welcome": "Welcome",
+      "title": "Product Designer",
+      "sentence": "Building clear digital experiences with a playful human touch."
+    },
+    {
+      "code": "de",
+      "label": "DE",
+      "welcome": "Willkommen",
+      "title": "Produktdesigner",
+      "sentence": "Ich gestalte klare digitale Erlebnisse mit einem menschlichen, spielerischen Ansatz."
+    },
+    {
+      "code": "fr",
+      "label": "FR",
+      "welcome": "Bienvenue",
+      "title": "Designer Produit",
+      "sentence": "Je conçois des expériences numeriques claires avec une touche humaine et ludique."
+    },
+    {
+      "code": "es",
+      "label": "ES",
+      "welcome": "Bienvenido",
+      "title": "Disenador de Producto",
+      "sentence": "Creo experiencias digitales claras con un estilo humano y creativo."
+    }
+  ],
+  "fonts": [
+    "\"Trebuchet MS\", \"Verdana\", system-ui, sans-serif",
+    "\"Georgia\", \"Times New Roman\", serif",
+    "\"Arial Black\", \"Arial\", sans-serif",
+    "\"Courier New\", monospace"
+  ],
+  "animation": {
+    "welcomeIntervalMs": 3200
+  },
+  "transition": {
+    "durationMs": 900,
+    "message": "Waking desktop..."
+  }
+}

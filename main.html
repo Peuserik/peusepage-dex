@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Office Main Page</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body data-mode="day">
+    <main class="monitor-frame" aria-label="Monitor frame">
+      <section id="office-scene" class="office-scene" aria-label="Old office scene">
+        <div class="scene-backdrop">
+          <div class="back-wall"></div>
+          <div class="right-wall"></div>
+
+          <button id="window-action" class="object-button object-window actionable" type="button" aria-label="">
+            <div class="outside-sky"></div>
+            <div class="outside-hill"></div>
+            <div class="outside-tree"></div>
+            <div class="outside-car"></div>
+            <div class="outside-ball"></div>
+          </button>
+
+          <div class="certificate-thread"></div>
+          <button id="certificate-action" class="object-button object-certificate actionable" type="button" aria-label="">
+            <article class="certificate-card">
+              <p id="certificate-label" class="certificate-label"></p>
+              <h1 id="certificate-name" class="certificate-name"></h1>
+              <p id="certificate-title" class="certificate-title"></p>
+              <p id="certificate-sentence" class="certificate-sentence"></p>
+            </article>
+          </button>
+
+          <button id="pinboard-action" class="object-button object-pinboard actionable" type="button" aria-label="">
+            <h2 id="pinboard-title" class="pinboard-title"></h2>
+            <div class="pin-note note-a"></div>
+            <div class="pin-note note-b"></div>
+            <div class="pin-note note-c"></div>
+          </button>
+        </div>
+
+        <section class="desk-zone" aria-label="Desk foreground">
+          <div class="chair"></div>
+          <div class="desk-surface"></div>
+
+          <button id="computer-action" class="object-button object-computer actionable" type="button" aria-label="">
+            <div class="crt-body">
+              <div id="crt-screen" class="crt-screen" data-theme="matrix-green">
+                <div id="crt-saver" class="crt-saver"></div>
+                <div id="crt-desktop" class="crt-desktop" hidden>
+                  <p id="desktop-file-name" class="desktop-file-name"></p>
+                  <div class="desktop-line line-1"></div>
+                  <div class="desktop-line line-2"></div>
+                  <div class="desktop-line line-3"></div>
+                  <div class="desktop-line line-4"></div>
+                </div>
+              </div>
+              <div class="crt-stand"></div>
+            </div>
+          </button>
+
+          <button id="keyboard-action" class="object-button object-keyboard actionable" type="button" aria-label="">
+            <span class="keyboard-detail"></span>
+          </button>
+
+          <div class="mousepad"></div>
+          <button id="mouse-action" class="object-button object-mouse actionable" type="button" aria-label=""></button>
+
+          <div class="lamp">
+            <div class="lamp-shade"></div>
+            <div class="lamp-neck"></div>
+            <div class="lamp-base"></div>
+            <div class="lamp-glow"></div>
+          </div>
+
+          <div class="coffee">
+            <div class="coffee-cup"></div>
+            <span class="steam steam-a"></span>
+            <span class="steam steam-b"></span>
+            <span class="steam steam-c"></span>
+          </div>
+        </section>
+      </section>
+
+      <section class="screen-controls" aria-label="Screen controls">
+        <button id="darkmode-button" class="control-button" type="button" aria-pressed="false"></button>
+        <button id="theme-button" class="control-button" type="button"></button>
+        <button id="language-button" class="control-button" type="button"></button>
+      </section>
+    </main>
+
+    <section id="popup-layer" class="popup-layer" aria-live="polite"></section>
+
+    <template id="popup-template">
+      <section class="popup-overlay">
+        <article class="popup-window" role="dialog" aria-modal="true">
+          <header class="popup-header">
+            <h2 class="popup-title"></h2>
+            <button type="button" class="popup-close" aria-label="Close window">x</button>
+          </header>
+          <div class="popup-body"></div>
+        </article>
+      </section>
+    </template>
+
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>
