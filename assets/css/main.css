@@ -57,39 +57,39 @@ body {
 }
 
 .office-scene {
-  --window-x: 4.5%;
-  --window-y: 15%;
-  --window-w: 33%;
-  --window-h: 36%;
-  --thread-left: 28%;
-  --thread-right: 28%;
-  --thread-y: 8.8%;
-  --certificate-y: 11%;
-  --certificate-w: min(300px, 31vw);
+  --window-x: 5%;
+  --window-y: 16%;
+  --window-w: 34%;
+  --window-h: 34%;
+  --thread-left: 30%;
+  --thread-right: 30%;
+  --thread-y: 12%;
+  --certificate-y: 13.1%;
+  --certificate-w: min(295px, 30vw);
   --certificate-min-w: 210px;
   --pinboard-x: 68%;
-  --pinboard-y: 25%;
-  --pinboard-w: 21%;
-  --pinboard-h: 27%;
-  --computer-x: 48%;
-  --computer-bottom: 24%;
-  --computer-w: 26%;
-  --crt-left: 14%;
-  --crt-right: 16%;
-  --crt-top: 14%;
-  --crt-bottom: 30%;
+  --pinboard-y: 24%;
+  --pinboard-w: 20%;
+  --pinboard-h: 25%;
+  --computer-x: 49.5%;
+  --computer-bottom: 25%;
+  --computer-w: 24%;
+  --crt-left: 17%;
+  --crt-right: 19%;
+  --crt-top: 17%;
+  --crt-bottom: 34%;
   --keyboard-x: 49%;
-  --keyboard-bottom: 13%;
+  --keyboard-bottom: 12.5%;
   --keyboard-w: 23%;
-  --keyboard-h: 10%;
-  --mouse-x: 75%;
-  --mouse-bottom: 14%;
-  --mouse-w: 6%;
-  --mouse-h: 8.5%;
-  --lamp-x: 66%;
-  --lamp-bottom: 17%;
-  --lamp-w: 16%;
-  --lamp-h: 44%;
+  --keyboard-h: 8%;
+  --mouse-x: 74.5%;
+  --mouse-bottom: 13.4%;
+  --mouse-w: 5.2%;
+  --mouse-h: 7.2%;
+  --lamp-x: 66.5%;
+  --lamp-bottom: 16.2%;
+  --lamp-w: 13.8%;
+  --lamp-h: 41%;
   position: absolute;
   inset: 14px 14px 78px;
   overflow: hidden;
@@ -130,6 +130,27 @@ body {
 
 body[data-trace="on"] .trace-overlay {
   opacity: 1;
+}
+
+body[data-trace="on"] .object-button {
+  border-color: rgb(66 233 255 / 85%);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
+}
+
+body[data-trace="on"] .object-button::after {
+  content: attr(data-hotspot);
+  position: absolute;
+  left: 0;
+  top: -18px;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #0a1a24;
+  background: rgb(66 233 255 / 92%);
+  padding: 2px 4px;
+  border: 1px solid rgb(0 0 0 / 45%);
+  pointer-events: none;
 }
 
 .wall-main {
