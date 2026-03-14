@@ -309,6 +309,7 @@ const applyInitialUrlState = () => {
   const theme = params.get("theme");
   const lang = params.get("lang");
   const mode = params.get("mode");
+  const trace = params.get("trace");
 
   if (theme) {
     const themeIndex = state.config.themes.findIndex((entry) => entry.id === theme);
@@ -325,6 +326,7 @@ const applyInitialUrlState = () => {
   }
 
   setNightMode(mode === "night");
+  document.body.dataset.trace = trace === "1" || trace === "true" ? "on" : "off";
 };
 
 const loadConfig = async () => {

@@ -109,6 +109,11 @@ const startTransition = () => {
       lang: selectedLanguage.code,
       mode,
     });
+    const incoming = new URLSearchParams(window.location.search);
+    const trace = incoming.get("trace");
+    if (trace) {
+      params.set("trace", trace);
+    }
     window.location.href = `${state.config.meta.mainPage}?${params.toString()}`;
   }, durationMs);
 };

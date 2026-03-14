@@ -57,6 +57,39 @@ body {
 }
 
 .office-scene {
+  --window-x: 4.5%;
+  --window-y: 15%;
+  --window-w: 33%;
+  --window-h: 36%;
+  --thread-left: 28%;
+  --thread-right: 28%;
+  --thread-y: 8.8%;
+  --certificate-y: 11%;
+  --certificate-w: min(300px, 31vw);
+  --certificate-min-w: 210px;
+  --pinboard-x: 68%;
+  --pinboard-y: 25%;
+  --pinboard-w: 21%;
+  --pinboard-h: 27%;
+  --computer-x: 48%;
+  --computer-bottom: 24%;
+  --computer-w: 26%;
+  --crt-left: 14%;
+  --crt-right: 16%;
+  --crt-top: 14%;
+  --crt-bottom: 30%;
+  --keyboard-x: 49%;
+  --keyboard-bottom: 13%;
+  --keyboard-w: 23%;
+  --keyboard-h: 10%;
+  --mouse-x: 75%;
+  --mouse-bottom: 14%;
+  --mouse-w: 6%;
+  --mouse-h: 8.5%;
+  --lamp-x: 66%;
+  --lamp-bottom: 17%;
+  --lamp-w: 16%;
+  --lamp-h: 44%;
   position: absolute;
   inset: 14px 14px 78px;
   overflow: hidden;
@@ -73,6 +106,30 @@ body {
   pointer-events: none;
   background: linear-gradient(180deg, rgb(255 226 179 / 12%), rgb(24 16 10 / 22%));
   z-index: 1;
+}
+
+.trace-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms linear;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgb(97 215 255 / 35%) 0 1px,
+      transparent 1px calc(100% / 12)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgb(255 201 102 / 25%) 0 1px,
+      transparent 1px 100px
+    );
+}
+
+body[data-trace="on"] .trace-overlay {
+  opacity: 1;
 }
 
 .wall-main {
@@ -110,10 +167,10 @@ body {
 }
 
 .object-window {
-  left: 4.5%;
-  top: 15%;
-  width: 33%;
-  height: 36%;
+  left: var(--window-x);
+  top: var(--window-y);
+  width: var(--window-w);
+  height: var(--window-h);
   z-index: 3;
 }
 
@@ -147,9 +204,9 @@ body {
 
 .hanging-thread {
   position: absolute;
-  left: 28%;
-  right: 28%;
-  top: 8.8%;
+  left: var(--thread-left);
+  right: var(--thread-right);
+  top: var(--thread-y);
   height: 2px;
   background: #f3dfbf;
   opacity: 0.55;
@@ -158,9 +215,9 @@ body {
 
 .object-certificate {
   left: 50%;
-  top: 11%;
-  width: min(300px, 31vw);
-  min-width: 210px;
+  top: var(--certificate-y);
+  width: var(--certificate-w);
+  min-width: var(--certificate-min-w);
   transform: translateX(-50%);
   z-index: 4;
 }
@@ -201,10 +258,10 @@ body {
 }
 
 .object-pinboard {
-  right: 11%;
-  top: 25%;
-  width: 21%;
-  height: 27%;
+  left: var(--pinboard-x);
+  top: var(--pinboard-y);
+  width: var(--pinboard-w);
+  height: var(--pinboard-h);
   z-index: 3;
 }
 
@@ -321,9 +378,9 @@ body {
 }
 
 .object-computer {
-  left: 48%;
-  bottom: 24%;
-  width: 26%;
+  left: var(--computer-x);
+  bottom: var(--computer-bottom);
+  width: var(--computer-w);
   aspect-ratio: 4 / 3;
   z-index: 4;
 }
@@ -338,10 +395,10 @@ body {
 
 .crt-screen {
   position: absolute;
-  left: 14%;
-  right: 16%;
-  top: 14%;
-  bottom: 30%;
+  left: var(--crt-left);
+  right: var(--crt-right);
+  top: var(--crt-top);
+  bottom: var(--crt-bottom);
   border: 3px solid #232323;
   border-radius: 3px;
   overflow: hidden;
@@ -497,10 +554,10 @@ body {
 }
 
 .object-keyboard {
-  left: 49%;
-  bottom: 13%;
-  width: 23%;
-  height: 10%;
+  left: var(--keyboard-x);
+  bottom: var(--keyboard-bottom);
+  width: var(--keyboard-w);
+  height: var(--keyboard-h);
   z-index: 4;
 }
 
@@ -513,19 +570,19 @@ body {
 }
 
 .object-mouse {
-  left: 75%;
-  bottom: 14%;
-  width: 6%;
-  height: 8.5%;
+  left: var(--mouse-x);
+  bottom: var(--mouse-bottom);
+  width: var(--mouse-w);
+  height: var(--mouse-h);
   z-index: 4;
 }
 
 .lamp {
   position: absolute;
-  left: 66%;
-  bottom: 17%;
-  width: 16%;
-  height: 44%;
+  left: var(--lamp-x);
+  bottom: var(--lamp-bottom);
+  width: var(--lamp-w);
+  height: var(--lamp-h);
   z-index: 4;
 }
 
@@ -868,26 +925,11 @@ body[data-mode="night"] .control-button {
 @media (max-width: 1020px) {
   .office-scene {
     inset: 10px 10px 76px;
-  }
-
-  .object-window {
-    width: 36%;
-  }
-
-  .object-certificate {
-    width: min(340px, 42vw);
-  }
-
-  .object-pinboard {
-    width: 28%;
-  }
-
-  .object-computer {
-    width: 28%;
-  }
-
-  .object-keyboard {
-    width: 24%;
+    --window-w: 36%;
+    --certificate-w: min(340px, 42vw);
+    --pinboard-w: 28%;
+    --computer-w: 28%;
+    --keyboard-w: 24%;
   }
 }
 
@@ -898,74 +940,22 @@ body[data-mode="night"] .control-button {
 
   .office-scene {
     inset: 8px 8px 102px;
-  }
-
-  .wall-main {
-    inset: 0 0 38% 0;
-  }
-
-  .wall-right {
-    display: none;
-  }
-
-  .bookshelf {
-    display: none;
-  }
-
-  .object-window {
-    width: 44%;
-    height: 30%;
-  }
-
-  .object-certificate {
-    top: 9%;
-    width: 52%;
-    min-width: 180px;
-  }
-
-  .object-pinboard {
-    right: 4%;
-    width: 35%;
-    top: 22%;
-  }
-
-  .desk-zone {
-    height: 54%;
-  }
-
-  .chair {
-    left: 28%;
-    width: 18%;
-  }
-
-  .object-computer {
-    left: 44%;
-    width: 40%;
-    transform: none;
-  }
-
-  .object-keyboard {
-    left: 45%;
-    width: 32%;
-  }
-
-  .mousepad {
-    left: 79%;
-    width: 16%;
-  }
-
-  .object-mouse {
-    left: 84%;
-    width: 5.6%;
-  }
-
-  .lamp {
-    left: 16%;
-    width: 22%;
-  }
-
-  .coffee {
-    left: 6%;
+    --window-w: 44%;
+    --window-h: 30%;
+    --certificate-y: 9%;
+    --certificate-w: 52%;
+    --certificate-min-w: 180px;
+    --pinboard-x: 61%;
+    --pinboard-y: 22%;
+    --pinboard-w: 35%;
+    --computer-x: 44%;
+    --computer-w: 40%;
+    --keyboard-x: 45%;
+    --keyboard-w: 32%;
+    --mouse-x: 84%;
+    --mouse-w: 5.6%;
+    --lamp-x: 16%;
+    --lamp-w: 22%;
   }
 
   .screen-controls {
